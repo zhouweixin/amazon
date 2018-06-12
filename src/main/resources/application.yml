@@ -1,0 +1,10 @@
+spring:
+  profiles:
+    active: local
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+server:
+  port: 8080
+  context-path: /amz-cube

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>商品详细信息</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/showDetails.css" rel="stylesheet">
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/echarts.js"></script>
+    <script src="js/loadEchartsDetails.js"></script>
+    <script src="js/details.js"></script>
+    <script src="js/pageResize.js"></script>
+    <script src="js/ipPort.js"></script>
+    <script src="js/getUser.js"></script>
+    <script src="js/jquerysession.js"></script>
+    <script src="js/pageHeightResize.js"></script>
+    <script src="js/logout.js"></script>
+</head>
+<body>
+<nav  id="main-nav" class="navbar navbar-default navbar-fixed-top">
+    <div  class="container-fluid">
+        <div class="row">
+            <div class="navbar-header col-xs-12 col-sm-3">
+                <a id="main-logo" class="navbar-brand" href="index.html">
+                    <img  class="img-responsive" alt="Brand" src="imgs/logo.png">
+                </a>
+                <div id="nav-xs-icon" class="navbar-toggle collapsed" data-toggle="collapse" aria-expanded="false" style="border: none;margin-top: 0px; margin-bottom: auto; width: auto;float:right">
+                    <!--<a style="" class="btn nav-button"><span class="glyphicon glyphicon-cog"></span></a>-->
+                    <!--<a style="" class="btn nav-button"><span class="glyphicon glyphicon-user"></span></a>-->
+                    <a id="nav-collapsed-button" style="border: 1px solid #BEBEBE;" type="button" class="collapsed btn" data-toggle="collapse" data-target="#left-sub-nav-xs" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                </div>
+            </div>
+            <div id="nav-label">
+                <div class="row">
+                    <div class="text-p center-block">
+                        <p class="nav-label-text navbar-text"><span id="userName-span"></span></p>
+                    </div>
+                    <div class="text-p center-block">
+                        <a onclick="logout()"><p  class="navbar-text">注销登陆</p></a>
+                    </div>
+                    <!--<div class="text-p center-block">-->
+                    <!--<a href="#"><p class="nav-label-text navbar-text">用户管理</p></a>-->
+                    <!--</div>-->
+                    <!--<div class="text-p center-block">-->
+                    <!--<a href="#"><p class="nav-label-text navbar-text">注销登陆</p></a>-->
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<div id="nav-hidden"></div>
+<div id="content-panel" class="container-fluid">
+    <div id="left-nav-1" class="hidden-xs col-xs-12 col-sm-3 col-md-3 col-lg-3 nav"></div>
+    <div id="left-nav" class="hidden-xs col-xs-12 col-sm-3 col-md-3 col-lg-3 nav">
+        <div class="hidden-xs collapse navbar-collapse" id="left-sub-nav">
+            <a class="btn btn-info btn-lg center-block left-button" href="spiderRegular.html" type="button">
+                <img  class="img-responsive" alt="left-nav-0" src="imgs/left_nav_0.png">&nbsp;&nbsp;&nbsp;&nbsp;爬虫规则
+            </a>
+            <a id="active-button" class="btn btn-info btn-lg center-block left-button" href="dataShow.html" type="button">
+                <img class="img-responsive" alt="left-nav-3" src="imgs/left_nav_1.png">&nbsp;&nbsp;&nbsp;&nbsp;数据显示
+            </a>
+            <a class="btn btn-info btn-lg center-block left-button" href="rankCompare.html" type="button">
+                <img class="img-responsive" alt="left-nav-1" src="imgs/left_nav_4.png">&nbsp;&nbsp;&nbsp;&nbsp;排名对比
+            </a>
+            <a class="btn btn-info btn-lg center-block left-button"  href="dataAnalysis.html" type="button">
+                <img class="img-responsive" alt="left-nav-2" src="imgs/left_nav_2.png">&nbsp;&nbsp;&nbsp;&nbsp;数据分析
+            </a>
+            <!--<a class="btn btn-info btn-lg center-block" href="interface.html" type="button">-->
+            <!--<img class="img-responsive" alt="left-nav-3" src="imgs/left_nav_3.png">&nbsp;&nbsp;&nbsp;&nbsp;接口调用-->
+            <!--</a>-->
+        </div>
+    </div>
+    <div id="left-nav-xs" class="visible-xs col-xs-12 col-sm-3 col-md-3 col-lg-3 nav">
+        <div class="collapse navbar-collapse" id="left-sub-nav-xs">
+            <a class="btn btn-info btn-lg center-block" href="spiderRegular.html" type="button">
+                <img  class="img-responsive" alt="left-nav-0" src="imgs/left_nav_0.png">&nbsp;&nbsp;&nbsp;&nbsp;爬虫规则
+            </a>
+            <a id="active-button" class="btn btn-info btn-lg center-block" href="dataShow.html" type="button">
+                <img class="img-responsive" alt="left-nav-3" src="imgs/left_nav_1.png">&nbsp;&nbsp;&nbsp;&nbsp;数据显示
+            </a>
+            <a class="btn btn-info btn-lg center-block" href="rankCompare.html" type="button">
+                <img class="img-responsive" alt="left-nav-1" src="imgs/left_nav_4.png">&nbsp;&nbsp;&nbsp;&nbsp;排名对比
+            </a>
+            <a class="btn btn-info btn-lg center-block"  href="dataAnalysis.html" type="button">
+                <img class="img-responsive" alt="left-nav-2" src="imgs/left_nav_2.png">&nbsp;&nbsp;&nbsp;&nbsp;数据分析
+            </a>
+        </div>
+    </div>
+    <div id="right-panel" class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+        <div class="row">
+            <div id="showDetails-goodsImg" class="col-xs-12">
+                <img id="nav-path-img" style="display: inline" class="img-responsive" alt="nav-path-img" src="imgs/nav_path_img.png">
+                <ol style="display: inline-block" id="nav-path" class="breadcrumb">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="dataShow.html">数据显示</a></li>
+                    <li class="active">详细信息</li>
+                </ol>
+            </div>
+        </div>
+        <div id="right-panel-content" class="row">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-xs-12">
+                        <div class="row">
+                            <div class="col-xs-4 col-sm-4 col-md-5">
+                                <div class="row">
+                                    <img id="goods-img" class="img-rounded img-responsive" src="">
+                                </div>
+                            </div>
+                            <div class="col-xs-8 col-xs-push-0 col-sm-8 col-sm-push-0 col-md-6 col-md-push-1">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div id ="goods-introduction">
+                                            <p id="goods-name" class="lead"></p>
+                                            <p id=""  class="goods-introduction-p"><span><strong>价格：</strong></span><span id="goods-price"></span></p>
+                                            <p id="" class="goods-introduction-p"><span><strong>ASIN：</strong></span><span id="goods-asin"></span></p>
+                                            <p id="" class="goods-introduction-p"><span><strong>品牌：</strong></span><span id="goods-brand"></span></p>
+                                            <p id="" class="goods-introduction-p"><span><strong>当前排名：</strong></span><span id="goods-nowRanking"></span></p>
+                                            <p id="" class="goods-introduction-p"><span><strong>星级评分：</strong></span><span id="goods-star"></span></p>
+                                            <p id="" class="goods-introduction-p"><span><strong>评论数量：</strong></span><span id="goods-comments"></span></p>
+                                            <p id="" class="goods-introduction-p"><span><strong>材质：</strong></span><span id="goods-material"></span></p>
+                                            <p id="" class="goods-introduction-p"><span><strong>颜色：</strong></span><span id="goods-color"></span></p>
+                                            <p id="" class="goods-introduction-p"><span><strong>要点：</strong></span><span id="goods-points"></span></p>
+                                            <p id="" class="goods-introduction-p"><span><strong>商品模型编号：</strong></span><span id="goods-modelNumber"></span></p>
+                                            <p id="" class="goods-introduction-p"><span><strong>第一次上架日期：</strong></span><span id="goods-firstDate"></span></p>
+                                            <p id="" class="goods-introduction-p"><span><strong>下载日期：</strong></span><span id="goods-downloadDate"></span></p>
+                                            <p id="goods-url-p" class="goods-introduction-p"><span><strong>商品链接：</strong></span><a id="goods-url-a" href=""><span id="goods-url"></span></a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <p><h3>商品描述：</h3></p>
+                </div>
+                <div class="panel-body">
+                    <div class="col-xs-12">
+                        <p id="goods-description"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div style="margin: 0 0" class="row">
+                    <div class="col-xs-12">
+                        <div style="display: inline-block" class="input-group">
+                            <label for="getStartDate">开始日期：</label>
+                            <input  id="getStartDate" type="date">
+                        </div>
+                        <div style="display: inline-block"class="input-group">
+                            <label for="getEndDate">截止日期：</label>
+                            <input  id="getEndDate" type="date">
+                        </div>
+                        <button id="searchingButton" class="btn btn-default" onclick="searching()">搜索</button>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 10px;margin-bottom: 0px" id="echartsTitle1" class="lead"><strong>商品排名折线图</strong></p>
+                <div class="panel-body">
+                    <div id="echartsRanking" style="height: 500px" class="container-fluid">
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 10px;margin-bottom: 0px" id="echartsTitle2" class="lead"><strong>星级变化折线图</strong></p>
+                <div class="panel-body">
+                    <div id="echartsStars" style="height: 500px" class="container-fluid">
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 10px;margin-bottom: 0px" id="echartsTitle3" class="lead"><strong>价格变化折线图</strong></p>
+                <div class="panel-body">
+                    <div id="echartsPrice" style="height: 500px" class="container-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
